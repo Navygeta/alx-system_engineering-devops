@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#parsing apache log file and sorting the data
+
+path="apache-access.log"
+awk -F' ' '{ print $1, $9}' $path | sort | uniq -c|sort -nr

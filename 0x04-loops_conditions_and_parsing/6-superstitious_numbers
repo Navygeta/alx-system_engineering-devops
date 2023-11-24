@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #Bash script that displays numbers from 1 to 20 using while, case and:
 
 #displays 4 and then bad luck from China for the 4th loop iteration

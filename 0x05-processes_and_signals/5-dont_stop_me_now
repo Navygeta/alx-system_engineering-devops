@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# script that stops 4-to_infinity_and_beyond process.
+
+./4-to_infinity_and_beyond &
+pid=$!
+sleep 28
+kill "$pid"
+echo "Terminated"

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#displays:
+
+#The content of the current directory
+#In a list format
+#Where only the part of the name after the first dash is displayed
+
+for filename in *; do
+    if [[ -f "$filename" && ! "$filename" =~ ^\. ]]; then
+        name_after_dash=$(echo "$filename" | cut -d '-' -f2)
+        echo "$name_after_dash"
+    fi
+done

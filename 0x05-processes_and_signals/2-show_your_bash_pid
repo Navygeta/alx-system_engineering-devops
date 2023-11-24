@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script that displays the word "bash" in a list of processes
 # shellcheck disable=SC2009
 

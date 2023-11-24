@@ -2,4 +2,4 @@
 # Script that displays the word "bash" in a list of processes
 # shellcheck disable=SC2009
 
-ps aux --forest | grep '/bash/'
+ps aux --forest | grep bash

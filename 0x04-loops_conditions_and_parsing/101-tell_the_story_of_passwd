@@ -4,13 +4,13 @@
 path="/etc/passwd"
 
 while IFS= read -r line; do
-    f1="$(echo "$line" | cut -d":" -f1)"
-    f2="$(echo "$line" | cut -d":" -f4)"
-    f3="$(echo "$line" | cut -d":" -f6)"
-    f4="$(echo "$line" | cut -d":" -f7)"
-    f5="$(echo "$line" | cut -d":" -f3)"
-    f6="$(echo "$line" | cut -d":" -f7)"
-    f7="$(echo "$line" | cut -d":" -f5)"
-    echo "The user ${f1} is part of the ${f2} gang, lives in ${f3} and rides ${f4}. ${f5}'s place is protected by the passcode ${f6}, more info about the user here: ${f7}"
-done < "$path"
+    username="$(echo "$line" | cut -d":" -f1)"
+    group_id="$(echo "$line" | cut -d":" -f4)"
+    home_directory="$(echo "$line" | cut -d":" -f6)"
+    user_shell="$(echo "$line" | cut -d":" -f7)"
+    user_id="$(echo "$line" | cut -d":" -f3)"
+    passcode="$(echo "$line" | cut -d":" -f7)"  # Using field 7 for shell
+    additional_info="$(echo "$line" | cut -d":" -f5)"
 
+    echo "The user ${username} is part of the ${group_id} gang, lives in ${home_directory} and rides ${user_shell}. ${user_id}'s place is protected by the passcode ${passcode}, more info about the user here: ${additional_info}"
+done < "$path"

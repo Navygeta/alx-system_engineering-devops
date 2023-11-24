@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#Displays process name along with Id
+pgrep -l bash

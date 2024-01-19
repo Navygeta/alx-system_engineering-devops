@@ -7,11 +7,11 @@ package { 'python3-pip':
 
 package { 'flask':
   ensure   => '2.1.0',
-  provider => 'pipi',
+  provider => 'pip',
 }
 
 package { 'werkzeug':
-  ensure => '2.1.1',
+  ensure   => '2.0.2',
   provider => 'pip',
-  require => Package['python3-pip']
+  require  => Package['python3-pip'],
 }

@@ -1,4 +1,20 @@
 #!usr/bin/env bash
 # Startapache  in docker
 
-service apache2 start
+docker run -p 8080:80 -d -it holbertonschool/265-0
+
+docker ps
+
+curl 0:8080
+
+docker exec -it $(docker ps -q) /bin/bash
+
+service apache2 status
+
+tail -n 20 /var/log/apache2/error.log
+
+srvice apache2 start
+
+exit
+
+curl 0:8080

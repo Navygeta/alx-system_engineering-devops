@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Installs Nginx on web-o1
+
+apt-get update
+apt-get install -y nginx
+echo "Holberton School" > /var/www/html/index.html
+service nginx start

@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
-# Installs Nginx on web-o1
+# Installs Nginx on web-01
 
-apt-get update
-apt-get install -y nginx
+server_name="web-01"
+server_ip="100.25.34.196"
 
-mkdir /etc/nginx/html
-touch /etc/nginx/html/index.html
-echo "Hello World!" > /etc/nginx/html/index.html
-printf %s "server {
-     listen      80;
-     listen      [::]:80 default_server;
-     root        /etc/nginx/html;
-     index       index.html index.htm;
-}
-" > /etc/nginx/sites-available/default
+sudo apt-get update
 
-service nginx restart
+sudo apt-get install -y nginx
+
+sudo sh -c "echo \"server {
+    listen 80;
+    server_name $server_name;
+
+    location / {
+        echo \\\"HTTP/1.1 200 OK\\n\\nHello World!\\\" | sudo tee /var/www/html/index.html > /dev/null;
+    }
+}\" > /etc/nginx/sites-available/default"
+
+sudo service nginx restart
+
+echo "Nginx installed and configured. Now listening on $server_ip:80 with server name $server_name"

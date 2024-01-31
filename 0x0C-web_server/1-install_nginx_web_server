@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 # Installs Nginx on web-01
 
-server_name="web-01"
-server_ip="100.25.34.196"
+#!/usr/bin/env bash
+#Installs a nginx web server on my server 454715-web-01
 
+#Updating packages pre-installations
 sudo apt-get update
+sudo apt-get upgrade
 
-sudo apt-get install -y nginx
+sudo apt-get -y install nginx
 
-sudo sh -c "echo \"server {
-    listen 80;
-    server_name $server_name;
+#Configuring uncomplicated firewall to allow incoming traffic.
 
-    location / {
-        echo \\\"HTTP/1.1 200 OK\\n\\nHello World!\\\" | sudo tee /var/www/html/index.html > /dev/null;
-    }
-}\" > /etc/nginx/sites-available/default"
+sudo ufw allow 'Nginx HTTP'
 
-sudo service nginx restart
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-echo "Nginx installed and configured. Now listening on $server_ip:80 with server name $server_name"
+#Testing Nginx configurations for syntax errors
+sudo nginx -t
+
+#Restarting Nginx web server
+sudo service nginx start

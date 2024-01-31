@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 # Startapache  in docker
 
 echo "ServerName localhost" >> /etc/apache2.conf

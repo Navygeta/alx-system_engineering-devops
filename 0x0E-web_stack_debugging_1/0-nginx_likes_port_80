@@ -3,5 +3,6 @@
 # Script to find out what’s keeping your Ubuntu container’s
 # nginx installation from listening on port 80
 
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart

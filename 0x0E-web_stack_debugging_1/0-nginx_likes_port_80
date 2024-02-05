@@ -3,24 +3,5 @@
 # Script to find out what’s keeping your Ubuntu container’s
 # nginx installation from listening on port 80
 
-if ! [ -x "$(command -v nginx)" ]; then
-    echo "Nginx is not installed. Please install it and rerun the script."
-    exit 1
-fi
-
-# Backup the existing Nginx configuration file
-cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
-
-# Update Nginx configuration to listen on port 80
-sed -i 's/listen [::]:80 default_server;/listen 80 default_server;/g' /etc/nginx/nginx.conf
-
-# Restart Nginx to apply changes
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 service nginx restart
-
-# Check if Nginx is now listening on port 80
-if netstat -tuln | grep ':80 '; then
-    echo "Nginx is now listening on port 80."
-else
-    echo "Failed to configure Nginx to listen on port 80."
-    exit 1
-fi

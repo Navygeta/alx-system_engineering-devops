@@ -1,4 +1,4 @@
-#!/usr/bin/ env bash
+#!/usr/bin/env bash
 # Block all incoming traffic ecxpet on ports 22, 80 and 443
 
 sudo apt install ufw

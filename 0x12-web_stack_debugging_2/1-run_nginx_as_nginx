@@ -3,13 +3,8 @@
 # configuration, and restarts the service to ensure it's running as the
 # nginx user. Finally, it checks if nginx is listening on port 8080.
 
-apt-get update
-apt-get install -y nginx
-service nginx stop
-useradd -m -s /bin/bash nginx
-chown -R nginx:nginx /var/lib/nginx /var/log/nginx
-sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
-service nginx start
-pgrep nginx
-nc -z 0 8080
-exit $?
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx start

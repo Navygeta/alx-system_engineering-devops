@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# SCript accepts one argument, run the whoami command
+# under the user passed as an argument
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
+
+sudo -u $1 whoami

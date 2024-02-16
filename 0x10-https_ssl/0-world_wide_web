@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # This Bash script automates the configuration of domain zones and provides detailed
 # information about specified subdomains. It fulfills specific requirements, including
 # adding predefined subdomains and pointing them to designated IP addresses. The script

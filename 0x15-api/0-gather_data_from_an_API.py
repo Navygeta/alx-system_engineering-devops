@@ -107,12 +107,13 @@ def get_employee_todo_progress(employee_id):
     for task_title in completed_tasks:
         print(f"\t\t{task_title}")
 
-
     # Display information in the specified format
-    #print(f"Employee {employee_name} is done with tasks "
-     #     f"({number_of_done_tasks}/{total_number_of_tasks}):")
-    #print(f"\t{employee_name}: {number_of_done_tasks}/{total_number_of_tasks}")
-    #[print(f"\t\t{task_title}") for task_title in completed_tasks]
+    """
+    print(f"Employee {employee_name} is done with tasks "
+         f"({number_of_done_tasks}/{total_number_of_tasks}):")
+    print(f"\t{employee_name}: {number_of_done_tasks}/{total_number_of_tasks}")
+    [print(f"\t\t{task_title}") for task_title in completed_tasks]
+    """
 
 
 if __name__ == "__main__":

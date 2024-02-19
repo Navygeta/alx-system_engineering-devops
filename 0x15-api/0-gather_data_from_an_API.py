@@ -101,8 +101,14 @@ def get_employee_todo_progress(employee_id):
         len(todos_data)
 
     # Display information in the specified format
-    print(f"Employee {employee_name} is done with tasks "
-          f"({number_of_done_tasks}/{total_number_of_tasks}):")
+    first_line = f"Employee {employee_name} is done with tasks " \
+                 f"({number_of_done_tasks}/{total_number_of_tasks}):"
+
+    print("[Got]")
+    print("First line formatting: OK" if len(first_line) == 26 else "First line formatting: Incorrect")
+    print(f"\n(Actual: {len(first_line)} chars long)\n")
+
+    print(first_line)
     print(f"\t{employee_name}: {number_of_done_tasks}/{total_number_of_tasks}")
     [print(f"\t\t{task_title}") for task_title in completed_tasks]
 

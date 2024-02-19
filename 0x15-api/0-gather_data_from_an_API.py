@@ -1,5 +1,45 @@
 #!/usr/bin/python3
+"""
+Module: gather_data_from_an_API
 
+This module defines functions for gathering and displaying information about
+an employee's TODO list progress using a REST API.
+
+Functions:
+    make_request(url: str) -> dict:
+        Make an HTTP GET request to the given URL and return the JSON response.
+
+        Args:
+            url (str): The URL to make the request to.
+
+        Returns:
+            dict: JSON response from the HTTP GET request.
+
+        Raises:
+            requests.exceptions.RequestException: If an error occurs during
+            the request.
+
+    get_employee_todo_progress(employee_id: int) -> None:
+        Fetch and display information about the employee's TODO list progress.
+
+        Args:
+            employee_id (int): The ID of the employee.
+
+        Displays:
+            Employee EMPLOYEE_NAME is done with tasks
+            (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+                EMPLOYEE_NAME: name of the employee
+                NUMBER_OF_DONE_TASKS: number of completed tasks
+                TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum
+                of completed and non-completed tasks
+            Second and N next lines display the title of completed tasks:
+                TASK_TITLE (with 1 tabulation & 1 space before the TASK_TITLE)
+
+Main Execution:
+    If the module is executed directly, it takes one command-line argument
+    (employee_id) and calls get_employee_todo_progress function to fetch and
+    display the employee's TODO list progress.
+"""
 import requests
 import sys
 

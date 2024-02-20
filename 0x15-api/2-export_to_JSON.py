@@ -55,6 +55,7 @@ import requests
 import sys
 import json
 
+
 def make_request(url):
     """
     Make an HTTP GET request to the given URL and return the JSON response.
@@ -78,6 +79,7 @@ def make_request(url):
         print(f"Error fetching data from {url}: {e}")
         sys.exit(1)
 
+
 def export_to_json(employee_id, tasks_data):
     """
     Export the tasks data to a JSON file.
@@ -93,6 +95,7 @@ def export_to_json(employee_id, tasks_data):
     with open(file_name, 'w') as json_file:
         json.dump({str(employee_id): tasks_data}, json_file, indent=2)
     print(f"Data exported to {file_name}")
+
 
 def get_employee_todo_progress(employee_id):
     """
@@ -136,6 +139,7 @@ def get_employee_todo_progress(employee_id):
 
     # Export data to JSON file
     export_to_json(employee_id, tasks_data)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

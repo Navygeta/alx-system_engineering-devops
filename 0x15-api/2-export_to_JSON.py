@@ -4,51 +4,6 @@ Module: gather_data_from_an_API
 
 This module defines functions for gathering and displaying information about
 an employee's TODO list progress using a REST API.
-
-Functions:
-    make_request(url: str) -> dict:
-        Make an HTTP GET request to the given URL and return the JSON response.
-
-        Args:
-            url (str): The URL to make the request to.
-
-        Returns:
-            dict: JSON response from the HTTP GET request.
-
-        Raises:
-            requests.exceptions.RequestException: If an error occurs during
-            the request.
-
-    get_employee_todo_progress(employee_id: int) -> None:
-        Fetch and display information about the employee's TODO list progress.
-
-        Args:
-            employee_id (int): The ID of the employee.
-
-        Displays:
-            Employee EMPLOYEE_NAME is done with tasks
-            (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
-                EMPLOYEE_NAME: name of the employee
-                NUMBER_OF_DONE_TASKS: number of completed tasks
-                TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum
-                of completed and non-completed tasks
-            Second and N next lines display the title of completed tasks:
-                TASK_TITLE (with 1 tabulation and 1 space before the TASK_TITLE)
-
-    export_to_json(employee_id, tasks_data) -> None:
-        Export the tasks data to a JSON file.
-
-        Args:
-            employee_id (int): The ID of the employee.
-            tasks_data (list): List of dictionaries containing task information.
-
-        Writes:
-            Creates a JSON file named USER_ID.json with the specified format.
-
-Main Execution:
-    If the module is executed directly, it takes one command-line argument
-    (employee_id) and calls get_employee_todo_progress function to fetch and
-    display the employee's TODO list progress.
 """
 
 import requests
@@ -56,95 +11,20 @@ import sys
 import json
 
 
-def make_request(url):
-    """
-    Make an HTTP GET request to the given URL and return the JSON response.
-
-    Args:
-        url (str): The URL to make the request to.
-
-    Returns:
-        dict: JSON response from the HTTP GET request.
-
-    Raises:
-        requests.exceptions.RequestException: If an error occurs during
-        the request.
-    """
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        return response.json()
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from {url}: {e}")
-        sys.exit(1)
-
-
-def export_to_json(employee_id, tasks_data):
-    """
-    Export the tasks data to a JSON file.
-
-    Args:
-        employee_id (int): The ID of the employee.
-        tasks_data (list): List of dictionaries containing task information.
-
-    Writes:
-        Creates a JSON file named USER_ID.json with the specified format.
-    """
-    file_name = f"{employee_id}.json"
-    with open(file_name, 'w') as json_file:
-        json.dump({str(employee_id): tasks_data}, json_file, indent=2)
-    print(f"Data exported to {file_name}")
-
-
-def get_employee_todo_progress(employee_id):
-    """
-    Fetch and display information about the employee's TODO list progress.
-
-    Args:
-        employee_id (int): The ID of the employee.
-
-    Displays:
-        Employee EMPLOYEE_NAME is done with tasks
-        (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
-            EMPLOYEE_NAME: name of the employee
-            NUMBER_OF_DONE_TASKS: number of completed tasks
-            TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum of
-                completed and non-completed tasks
-        Second and N next lines display the title of completed tasks:
-            TASK_TITLE (with 1 tabulation and 1 space before the TASK_TITLE)
-    """
-    base_url = "https://jsonplaceholder.typicode.com"
-    user_url = f"{base_url}/users/{employee_id}"
-    todos_url = f"{user_url}/todos"
-
-    # Fetch user information and TODO list for the user
-    user_data = make_request(user_url)
-    todos_data = make_request(todos_url)
-
-    # Extract relevant information
-    employee_name = user_data.get('name', 'Unknown Employee')
-    completed_tasks = [task['title'] for task in todos_data if task['completed']]
-    number_of_done_tasks, total_number_of_tasks = len(completed_tasks), len(todos_data)
-
-    # Display information in the specified format
-    print(f"Employee {employee_name} is done with tasks "
-          f"({number_of_done_tasks}/{total_number_of_tasks}):")
-    print(f"\t{employee_name}: {number_of_done_tasks}/{total_number_of_tasks}")
-    for task_title in completed_tasks:
-        print(f"\t\t{task_title}")
-
-    # Prepare task data for JSON export
-    tasks_data = [{"task": task_title, "completed": True, "username": employee_name} for task_title in completed_tasks]
-
-    # Export data to JSON file
-    export_to_json(employee_id, tasks_data)
-
+mport json
+import requests
+import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-        sys.exit(1)
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    employee_id = int(sys.argv[1])
-    get_employee_todo_progress(employee_id)
+    with open("{}.json".format(user_id), "w") as jsonfile:
+        json.dump({user_id: [{
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": username
+            } for t in todos]}, jsonfile)

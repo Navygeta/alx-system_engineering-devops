@@ -1,3 +1,5 @@
+![Image from Google Drive](https://drive.google.com/file/d/1-uKwxlsU16isbmTu2npMQ9ifBClgPWMn/view?usp=sharing)
+
 Postmortem: Web Stack Debugging 3 Outage
 
 **Issue Outline:

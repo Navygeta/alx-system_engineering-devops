@@ -1,4 +1,4 @@
-![Image from Google Drive](https://drive.google.com/file/d/1-uKwxlsU16isbmTu2npMQ9ifBClgPWMn/view?usp=sharing)
+![PostmortemJoke](https://github.com/Navygeta/images/blob/main/postmortem%20joke.jpg)
 
 Postmortem: Web Stack Debugging 3 Outage
 
